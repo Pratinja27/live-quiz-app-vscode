@@ -1,0 +1,69 @@
+{
+  // ── Java Settings ────────────────────────────────────────────────────────
+  // Points VS Code Java extension to the backend folder for Maven
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.compile.nullAnalysis.mode": "automatic",
+
+  // Source roots so VS Code correctly understands the project structure
+  "java.project.sourcePaths": [
+    "backend/src/main/java",
+    "backend/src/test/java"
+  ],
+
+  // Show Spring Boot live hover info (bean counts, request mappings, etc.)
+  "spring-boot.ls.problem.application-properties.PROP_UNKNOWN_PROPERTY": "WARNING",
+
+  // ── Editor Settings ───────────────────────────────────────────────────────
+  // Auto-format Java, JS, CSS files on save
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Java uses its own formatter
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+  },
+
+  // JavaScript / React
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+
+  // CSS
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+
+  // ── File Explorer ─────────────────────────────────────────────────────────
+  // Hide noisy folders from the file explorer
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/target": true,
+    "**/.idea": true,
+    "**/*.class": true
+  },
+
+  // ── Prettier Config (Frontend) ────────────────────────────────────────────
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "prettier.trailingComma": "es5",
+  "prettier.printWidth": 100,
+
+  // ── Terminal ──────────────────────────────────────────────────────────────
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+
+  // ── Maven ─────────────────────────────────────────────────────────────────
+  "maven.executable.path": "",  // Leave empty = uses mvnw wrapper automatically
+  "maven.terminal.useJavaHome": true,
+
+  // ── Spring Boot Dashboard ─────────────────────────────────────────────────
+  "spring-boot.ls.java.home": ""  // Leave empty = auto-detect JDK
+}

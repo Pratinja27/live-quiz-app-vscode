@@ -1,0 +1,126 @@
+### ============================================================
+### Live Quiz API Tests — VS Code REST Client
+### ============================================================
+### HOW TO USE:
+###   1. Install extension: "REST Client" (humao.rest-client)
+###   2. Click "Send Request" above any request below
+###   3. Response appears in a split panel on the right
+### ============================================================
+
+@baseUrl = http://localhost:8080/api
+
+### ── STEP 1: Create a Quiz ───────────────────────────────────
+# @name createQuiz
+POST {{baseUrl}}/quiz
+Content-Type: application/json
+
+{
+  "title": "General Knowledge Quiz"
+}
+
+### ── STEP 2: Add Question 1 ──────────────────────────────────
+POST {{baseUrl}}/question/quiz/1
+Content-Type: application/json
+
+{
+  "questionText": "What is the capital of France?",
+  "optionA": "Berlin",
+  "optionB": "Madrid",
+  "optionC": "Paris",
+  "optionD": "Rome",
+  "correctAnswer": "C"
+}
+
+### ── STEP 3: Add Question 2 ──────────────────────────────────
+POST {{baseUrl}}/question/quiz/1
+Content-Type: application/json
+
+{
+  "questionText": "Which planet is known as the Red Planet?",
+  "optionA": "Earth",
+  "optionB": "Mars",
+  "optionC": "Jupiter",
+  "optionD": "Venus",
+  "correctAnswer": "B"
+}
+
+### ── STEP 4: Add Question 3 ──────────────────────────────────
+POST {{baseUrl}}/question/quiz/1
+Content-Type: application/json
+
+{
+  "questionText": "What is 7 x 8?",
+  "optionA": "54",
+  "optionB": "56",
+  "optionC": "62",
+  "optionD": "48",
+  "correctAnswer": "B"
+}
+
+### ── STEP 5: Player 1 Joins ──────────────────────────────────
+POST {{baseUrl}}/player/join
+Content-Type: application/json
+
+{
+  "name": "Alice",
+  "quizId": 1
+}
+
+### ── STEP 6: Player 2 Joins ──────────────────────────────────
+POST {{baseUrl}}/player/join
+Content-Type: application/json
+
+{
+  "name": "Bob",
+  "quizId": 1
+}
+
+### ── STEP 7: Start the Quiz ──────────────────────────────────
+POST {{baseUrl}}/quiz/1/start
+
+### ── STEP 8: Get a Random Question ──────────────────────────
+GET {{baseUrl}}/question/quiz/1/random
+
+### ── STEP 9: Alice Submits Correct Answer ───────────────────
+POST {{baseUrl}}/player/submit
+Content-Type: application/json
+
+{
+  "playerId": 1,
+  "questionId": 1,
+  "selectedOption": "C"
+}
+
+### ── STEP 10: Bob Submits Wrong Answer ──────────────────────
+POST {{baseUrl}}/player/submit
+Content-Type: application/json
+
+{
+  "playerId": 2,
+  "questionId": 1,
+  "selectedOption": "A"
+}
+
+### ── STEP 11: Check Alice's Score ───────────────────────────
+GET {{baseUrl}}/player/1/score
+
+### ── STEP 12: See All Players in Quiz ───────────────────────
+GET {{baseUrl}}/player/quiz/1
+
+### ── STEP 13: View Leaderboard ──────────────────────────────
+GET {{baseUrl}}/player/quiz/1/leaderboard
+
+### ── STEP 14: End the Quiz ──────────────────────────────────
+POST {{baseUrl}}/quiz/1/end
+
+### ── STEP 15: Final Leaderboard ─────────────────────────────
+GET {{baseUrl}}/player/quiz/1/leaderboard
+
+### ── EXTRA: Get Quiz Details ────────────────────────────────
+GET {{baseUrl}}/quiz/1
+
+### ── EXTRA: Get All Quizzes ─────────────────────────────────
+GET {{baseUrl}}/quiz
+
+### ── EXTRA: Get All Questions in Quiz ───────────────────────
+GET {{baseUrl}}/question/quiz/1

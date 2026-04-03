@@ -1,0 +1,101 @@
+{
+  // This file lets you press F5 (or click the green ▶ in Run & Debug panel)
+  // to start the backend or frontend WITHOUT using the terminal.
+  //
+  // How to use:
+  //   1. Click the "Run & Debug" icon on the left sidebar (Ctrl+Shift+D)
+  //   2. Use the dropdown at the top to pick a config
+  //   3. Press F5 or click the green ▶ button
+
+  "version": "0.2.0",
+  "configurations": [
+
+    // ─────────────────────────────────────────────
+    // CONFIG 1: Start Spring Boot Backend (F5)
+    // Requires: "Extension Pack for Java" installed
+    // ─────────────────────────────────────────────
+    {
+      "type": "java",
+      "name": "▶ Start Spring Boot Backend",
+      "request": "launch",
+      "mainClass": "com.livequiz.LiveQuizApplication",
+      "projectName": "live-quiz-backend",
+      "args": "",
+      "vmArgs": "-Dspring.profiles.active=default",
+      // This is the folder VS Code looks in for your pom.xml
+      "cwd": "${workspaceFolder}/backend",
+      "console": "internalConsole",
+      "shortenCommandLine": "jarmanifest",
+      "env": {
+        // You can override application.properties values here
+        // e.g. "SPRING_DATASOURCE_PASSWORD": "mypassword"
+      }
+    },
+
+    // ─────────────────────────────────────────────
+    // CONFIG 2: Debug Spring Boot (with breakpoints)
+    // Same as above but pauses at breakpoints in your Java code
+    // ─────────────────────────────────────────────
+    {
+      "type": "java",
+      "name": "🐛 Debug Spring Boot Backend",
+      "request": "launch",
+      "mainClass": "com.livequiz.LiveQuizApplication",
+      "projectName": "live-quiz-backend",
+      "args": "",
+      "vmArgs": "-Dspring.profiles.active=default",
+      "cwd": "${workspaceFolder}/backend",
+      "console": "internalConsole",
+      "shortenCommandLine": "jarmanifest"
+    },
+
+    // ─────────────────────────────────────────────
+    // CONFIG 3: Start React Frontend
+    // Requires: Node.js installed + npm install done
+    // ─────────────────────────────────────────────
+    {
+      "type": "node",
+      "name": "▶ Start React Frontend",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start"],
+      "cwd": "${workspaceFolder}/frontend",
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "pattern": "Local:.+(https?://\\S+|[0-9]+)",
+        "uriFormat": "http://localhost:3000",
+        "action": "openExternally"
+        // Opens browser automatically when React starts
+      }
+    },
+
+    // ─────────────────────────────────────────────
+    // CONFIG 4: Debug React in Chrome
+    // Opens Chrome with debugging attached to React
+    // ─────────────────────────────────────────────
+    {
+      "type": "chrome",
+      "name": "🐛 Debug React in Chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/frontend/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
+    }
+  ],
+
+  // ─────────────────────────────────────────────
+  // COMPOUND: Start BOTH backend AND frontend together with one click
+  // ─────────────────────────────────────────────
+  "compounds": [
+    {
+      "name": "🚀 Start Full Stack (Backend + Frontend)",
+      "configurations": [
+        "▶ Start Spring Boot Backend",
+        "▶ Start React Frontend"
+      ],
+      "stopAll": true
+    }
+  ]
+}

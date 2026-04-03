@@ -1,0 +1,58 @@
+{
+  // MULTI-ROOT WORKSPACE FILE
+  //
+  // Double-click this file OR open it with:
+  //   VS Code → File → Open Workspace from File → live-quiz-app.code-workspace
+  //
+  // This opens BOTH backend and frontend as separate roots in one window.
+  // You'll see two folders in the Explorer: [backend] and [frontend]
+
+  "folders": [
+    {
+      "name": "🍃 Backend (Spring Boot)",
+      "path": "backend"
+    },
+    {
+      "name": "⚛️ Frontend (React)",
+      "path": "frontend"
+    }
+  ],
+
+  "settings": {
+    // Shared settings for the whole workspace
+
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/target": true,
+      "**/.class": true
+    },
+
+    // Java settings apply to backend root
+    "java.configuration.updateBuildConfiguration": "automatic",
+
+    // File icon theme
+    "workbench.iconTheme": "material-icon-theme",
+
+    // Terminal start path
+    "terminal.integrated.cwd": "${workspaceFolder}"
+  },
+
+  // These extensions will be recommended when you open this workspace
+  "extensions": {
+    "recommendations": [
+      "vscjava.vscode-java-pack",
+      "vmware.vscode-spring-boot",
+      "vscjava.vscode-spring-boot-dashboard",
+      "redhat.java",
+      "vscjava.vscode-maven",
+      "dsznajder.es7-react-js-snippets",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "humao.rest-client",
+      "cweijan.vscode-mysql-client2",
+      "PKief.material-icon-theme"
+    ]
+  }
+}

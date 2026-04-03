@@ -1,0 +1,163 @@
+{
+  // These are terminal tasks you can run from:
+  //   Terminal menu → Run Task...
+  //   OR press Ctrl+Shift+B to run the default build task
+
+  "version": "2.0.0",
+  "tasks": [
+
+    // ── BACKEND TASKS ──────────────────────────────────────────────────────
+
+    {
+      "label": "Backend: Install Dependencies (mvn install)",
+      "type": "shell",
+      // Downloads all Maven dependencies defined in pom.xml
+      // Run this FIRST before anything else
+      "command": "./mvnw clean install -DskipTests",
+      "windows": {
+        "command": "mvnw.cmd clean install -DskipTests"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": "$msCompile"
+    },
+
+    {
+      "label": "Backend: Run Spring Boot",
+      "type": "shell",
+      // Starts the Spring Boot server on port 8080
+      "command": "./mvnw spring-boot:run",
+      "windows": {
+        "command": "mvnw.cmd spring-boot:run"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true  // Ctrl+Shift+B runs this
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^.*$",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting LiveQuizApplication",
+          "endsPattern": "Started LiveQuizApplication"
+        }
+      }
+    },
+
+    {
+      "label": "Backend: Run Tests",
+      "type": "shell",
+      "command": "./mvnw test",
+      "windows": {
+        "command": "mvnw.cmd test"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+
+    {
+      "label": "Backend: Build JAR",
+      "type": "shell",
+      // Creates a runnable JAR at backend/target/live-quiz-backend-1.0.0.jar
+      "command": "./mvnw clean package -DskipTests",
+      "windows": {
+        "command": "mvnw.cmd clean package -DskipTests"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+
+    // ── FRONTEND TASKS ─────────────────────────────────────────────────────
+
+    {
+      "label": "Frontend: Install Dependencies (npm install)",
+      "type": "shell",
+      // Run this ONCE to download node_modules
+      "command": "npm install",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+
+    {
+      "label": "Frontend: Start React Dev Server",
+      "type": "shell",
+      // Starts React on http://localhost:3000
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^.*$",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting the development server",
+          "endsPattern": "Compiled successfully"
+        }
+      }
+    },
+
+    {
+      "label": "Frontend: Build for Production",
+      "type": "shell",
+      "command": "npm run build",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  // VS Code will show a popup "Do you want to install recommended extensions?"
+  // Click YES — these are the exact extensions you need for this project.
+  "recommendations": [
+
+    // ── JAVA / SPRING BOOT (backend) ──────────────────────────────────────
+    "vscjava.vscode-java-pack",          // Java Extension Pack (includes all below)
+    "vscjava.vscode-java-debug",         // Run & Debug Java with breakpoints
+    "vscjava.vscode-java-test",          // Run JUnit tests inside VS Code
+    "vscjava.vscode-maven",              // Maven Projects panel + run goals
+    "vscjava.vscode-spring-initializr",  // Spring Initializr inside VS Code
+    "vmware.vscode-spring-boot",         // Spring Boot Dashboard (start/stop app)
+    "vscjava.vscode-spring-boot-dashboard", // Sidebar panel for Spring Boot apps
+    "redhat.java",                       // Core Java language support
+
+    // ── REACT / FRONTEND ──────────────────────────────────────────────────
+    "dsznajder.es7-react-js-snippets",   // rfc, useState, useEffect snippets
+    "dbaeumer.vscode-eslint",            // JavaScript/JSX linting
+    "esbenp.prettier-vscode",            // Auto-format JS/CSS/JSON on save
+    "formulahendry.auto-rename-tag",     // Auto rename paired JSX tags
+    "burkeholland.simple-react-snippets",// More React shortcuts
+
+    // ── GENERAL PRODUCTIVITY ──────────────────────────────────────────────
+    "humao.rest-client",                 // Test APIs directly inside VS Code (like Postman)
+    "cweijan.vscode-mysql-client2",      // MySQL client inside VS Code
+    "PKief.material-icon-theme",         // Nice file icons
+    "GitHub.github-vscode-theme"         // Clean dark theme
+  ]
+}
