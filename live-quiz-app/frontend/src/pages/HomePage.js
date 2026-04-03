@@ -40,8 +40,8 @@ function HomePage() {
   return (
     <div className="home-page">
       <div className="hero">
-        <h1 className="hero-title">⚡ LiveQuiz</h1>
-        <p className="hero-subtitle">Host live quizzes. Play in real time. Win the crown.</p>
+        <h1 className="hero-title">⚡ ThinkTap</h1>
+        <p className="hero-subtitle">Tap Into Your Brainpower. Win the crown.</p>
       </div>
 
       <div className="cards-row">

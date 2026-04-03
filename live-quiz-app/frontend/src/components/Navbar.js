@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand" onClick={() => navigate('/')}>
-        ⚡ <span>LiveQuiz</span>
+        ⚡ <span>ThinkTap</span>
       </div>
       <div className="navbar-links">
         <button className="nav-link" onClick={() => navigate('/')}>Home</button>
