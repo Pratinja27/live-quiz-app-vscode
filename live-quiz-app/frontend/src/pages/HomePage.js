@@ -12,10 +12,9 @@ function HomePage() {
   return (
     <div className="home-page">
       <div className="hero">
-        <h1 className="hero-title">⚡ LiveQuiz</h1>
+        <h1 className="hero-title">⚡ ThinkTap</h1>
         <p className="hero-subtitle">
-          Host live quizzes. Play in real time. Win the crown.
-        </p>
+          Tap Into Your Brainpower   !     </p>
       </div>
 
       <div className="role-selector">
