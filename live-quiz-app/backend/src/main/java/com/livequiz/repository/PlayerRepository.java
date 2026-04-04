@@ -22,4 +22,7 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
      * Get all players who joined a specific quiz.
      */
     List<Player> findByQuizId(Long quizId);
+    void deleteByQuizId(Long quizId);  
+
+
 }

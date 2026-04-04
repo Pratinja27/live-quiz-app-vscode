@@ -271,3 +271,59 @@ h1, h2, h3 { font-family: 'Syne', sans-serif; }
 .rankings-table td { padding: 0.85rem 1rem; border-top: 1px solid var(--border); }
 .rankings-table .top-row { background: rgba(124,58,237,0.08); }
 .leaderboard-page .btn { width: auto; display: inline-block; }
+
+/* ---- SAVED QUIZZES (Host Side) ---- */
+.saved-quizzes {
+  margin-top: 2.5rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.saved-quizzes h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--primary-light);
+  font-family: 'Syne', sans-serif;
+}
+.quiz-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.quiz-list-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.quiz-list-item:hover {
+  border-color: var(--primary-light);
+  transform: translateX(3px);
+}
+.quiz-list-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.quiz-list-title {
+  font-size: 1rem;
+  color: var(--text);
+}
+.quiz-list-id {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.quiz-list-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.quiz-list-btn {
+  width: auto !important;
+  padding: 0.35rem 1rem !important;
+  font-size: 0.85rem !important;
+}

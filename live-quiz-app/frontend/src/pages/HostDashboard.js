@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getQuiz, addQuestion, getQuestions, startQuiz, endQuiz, getPlayersInQuiz } from '../services/api';
+import { getQuiz, addQuestion, getQuestions, startQuiz, endQuiz, getPlayersInQuiz,resetQuiz } from '../services/api';
 
 /**
  * HostDashboard - The quiz host's control panel.
@@ -93,6 +93,17 @@ function HostDashboard() {
     }
   };
 
+  const handleResetQuiz = async () => {
+    if (!window.confirm('Reset this quiz? All players and scores will be cleared. Questions are kept.')) return;
+    try {
+      await resetQuiz(quizId);
+      setSuccessMsg('Quiz reset! Add players and start again.');
+      fetchData();
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to reset quiz');
+    }
+  };
+
   if (loading) return <div className="loading">Loading quiz...</div>;
 
   const statusColor = { CREATED: '#f59e0b', STARTED: '#10b981', FINISHED: '#ef4444' };
@@ -120,9 +131,20 @@ function HostDashboard() {
             </button>
           )}
           {quiz?.status === 'FINISHED' && (
-            <button className="btn btn-secondary" onClick={() => navigate(`/leaderboard/${quizId}`)}>
-              🏆 View Leaderboard
-            </button>
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <button
+                className="btn btn-secondary"
+                onClick={() => navigate(`/leaderboard/${quizId}`)}
+              >
+                🏆 View Leaderboard
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={handleResetQuiz}
+              >
+                🔄 Play Again
+              </button>
+            </div>
           )}
         </div>
       </div>

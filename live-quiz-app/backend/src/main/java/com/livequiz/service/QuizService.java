@@ -3,6 +3,7 @@ package com.livequiz.service;
 import com.livequiz.dto.CreateQuizRequest;
 import com.livequiz.entity.Quiz;
 import com.livequiz.repository.QuizRepository;
+import com.livequiz.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import java.util.List;
 public class QuizService {
 
     private final QuizRepository quizRepository;
-
+    private final PlayerRepository playerRepository; 
     /**
      * Creates a new quiz with CREATED status.
      * The quiz is not yet visible to players until it is started.
@@ -79,10 +80,24 @@ public class QuizService {
                 .orElseThrow(() -> new RuntimeException("Quiz not found with ID: " + quizId));
     }
 
+
     /**
      * Returns all quizzes in the system.
      */
     public List<Quiz> getAllQuizzes() {
         return quizRepository.findAll();
+    }
+
+    public Quiz resetQuiz(Long quizId) {
+        Quiz quiz = getQuizById(quizId);
+
+        if (quiz.getStatus() != Quiz.QuizStatus.FINISHED) {
+            throw new IllegalStateException(
+                "Only FINISHED quizzes can be reset. Current status: " + quiz.getStatus()
+            );
+        }
+        playerRepository.deleteByQuizId(quizId);  // ← wipe old players
+        quiz.setStatus(Quiz.QuizStatus.CREATED);
+        return quizRepository.save(quiz);
     }
 }

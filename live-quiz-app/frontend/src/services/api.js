@@ -23,5 +23,6 @@ export const submitAnswer = (playerId, questionId, selectedOption) =>
 export const getPlayerScore = (playerId) => api.get(`/player/${playerId}/score`);
 export const getLeaderboard = (quizId) => api.get(`/player/quiz/${quizId}/leaderboard`);
 export const getPlayersInQuiz = (quizId) => api.get(`/player/quiz/${quizId}`);
+export const resetQuiz = (quizId) => api.post(`/quiz/${quizId}/reset`);  // ← ADD THIS
 
 export default api;

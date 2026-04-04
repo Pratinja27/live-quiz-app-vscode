@@ -86,6 +86,16 @@ public class QuizController {
     }
 
     /**
+     * POST /api/quiz/{id}/reset
+     * Resets a FINISHED quiz back to CREATED.
+     * Wipes old players/scores but keeps all questions.
+     */
+    @PostMapping("/{id}/reset")
+    public ResponseEntity<ApiResponse<Quiz>> resetQuiz(@PathVariable Long id) {
+        Quiz quiz = quizService.resetQuiz(id);
+        return ResponseEntity.ok(ApiResponse.ok("Quiz reset! Ready to play again.", quiz));
+    }
+    /**
      * Global exception handler for this controller.
      * Returns a clean error message when a RuntimeException or IllegalStateException is thrown.
      */
