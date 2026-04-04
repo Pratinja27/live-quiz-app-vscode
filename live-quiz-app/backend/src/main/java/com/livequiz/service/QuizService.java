@@ -4,8 +4,11 @@ import com.livequiz.dto.CreateQuizRequest;
 import com.livequiz.entity.Quiz;
 import com.livequiz.repository.QuizRepository;
 import com.livequiz.repository.PlayerRepository;
+import com.livequiz.repository.QuestionRepository;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +25,8 @@ public class QuizService {
 
     private final QuizRepository quizRepository;
     private final PlayerRepository playerRepository; 
+    private final QuestionRepository questionRepository;
+
     /**
      * Creates a new quiz with CREATED status.
      * The quiz is not yet visible to players until it is started.
@@ -99,5 +104,16 @@ public class QuizService {
         playerRepository.deleteByQuizId(quizId);  // ← wipe old players
         quiz.setStatus(Quiz.QuizStatus.CREATED);
         return quizRepository.save(quiz);
+    }
+    /**
+     * Deletes a quiz completely.
+     * Also deletes all its questions and players.
+     */
+    @Transactional
+    public void deleteQuiz(Long quizId) {
+        getQuizById(quizId); // throws if not found
+        playerRepository.deleteByQuizId(quizId);
+        questionRepository.deleteByQuizId(quizId);
+        quizRepository.deleteById(quizId);
     }
 }

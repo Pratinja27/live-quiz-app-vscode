@@ -95,8 +95,35 @@ public class QuizController {
         Quiz quiz = quizService.resetQuiz(id);
         return ResponseEntity.ok(ApiResponse.ok("Quiz reset! Ready to play again.", quiz));
     }
+
     /**
      * Global exception handler for this controller.
      * Returns a clean error message when a RuntimeException or IllegalStateException is thrown.
      */
+    /**
+     * DELETE /api/quiz/{id}
+     * Deletes quiz + all its questions + all its players.
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteQuiz(@PathVariable Long id) {
+        quizService.deleteQuiz(id);
+        return ResponseEntity.ok(ApiResponse.ok("Quiz deleted successfully.", null));
+    }
+
+    /**
+     * POST /api/quiz/login
+     * Simple host login — checks hardcoded credentials.
+     * Returns success true/false. No JWT needed.
+     */
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<String>> hostLogin(@RequestBody java.util.Map<String, String> body) {
+        String username = body.get("username");
+        String password = body.get("password");
+        if ("admin".equals(username) && "host123".equals(password)) {
+            return ResponseEntity.ok(ApiResponse.ok("Login successful", "authenticated"));
+        }
+        return ResponseEntity.status(401).body(ApiResponse.error("Invalid username or password"));
+    }
+
+    
 }

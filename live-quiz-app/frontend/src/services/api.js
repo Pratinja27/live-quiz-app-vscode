@@ -7,22 +7,36 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+// QUIZ APIs
 export const createQuiz = (title) => api.post('/quiz', { title });
 export const startQuiz = (quizId) => api.post(`/quiz/${quizId}/start`);
 export const endQuiz = (quizId) => api.post(`/quiz/${quizId}/end`);
 export const getQuiz = (quizId) => api.get(`/quiz/${quizId}`);
 export const getAllQuizzes = () => api.get('/quiz');
+export const resetQuiz = (quizId) => api.post(`/quiz/${quizId}/reset`);
+export const deleteQuiz = (quizId) => api.delete(`/quiz/${quizId}`);
 
-export const addQuestion = (quizId, questionData) => api.post(`/question/quiz/${quizId}`, questionData);
+// AUTH
+export const hostLogin = (username, password) =>
+  api.post('/quiz/login', { username, password });
+
+// QUESTION APIs
+export const addQuestion = (quizId, questionData) =>
+  api.post(`/question/quiz/${quizId}`, questionData);
 export const getQuestions = (quizId) => api.get(`/question/quiz/${quizId}`);
-export const getRandomQuestion = (quizId) => api.get(`/question/quiz/${quizId}/random`);
+export const getRandomQuestion = (quizId) =>
+  api.get(`/question/quiz/${quizId}/random`);
 
-export const joinQuiz = (name, quizId) => api.post('/player/join', { name, quizId });
+// PLAYER APIs
+export const joinQuiz = (name, quizId) =>
+  api.post('/player/join', { name, quizId });
 export const submitAnswer = (playerId, questionId, selectedOption) =>
   api.post('/player/submit', { playerId, questionId, selectedOption });
-export const getPlayerScore = (playerId) => api.get(`/player/${playerId}/score`);
-export const getLeaderboard = (quizId) => api.get(`/player/quiz/${quizId}/leaderboard`);
-export const getPlayersInQuiz = (quizId) => api.get(`/player/quiz/${quizId}`);
-export const resetQuiz = (quizId) => api.post(`/quiz/${quizId}/reset`);  // ← ADD THIS
+export const getPlayerScore = (playerId) =>
+  api.get(`/player/${playerId}/score`);
+export const getLeaderboard = (quizId) =>
+  api.get(`/player/quiz/${quizId}/leaderboard`);
+export const getPlayersInQuiz = (quizId) =>
+  api.get(`/player/quiz/${quizId}`);
 
 export default api;
