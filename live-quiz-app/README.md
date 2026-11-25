@@ -192,3 +192,10 @@ See `POSTMAN_API_EXAMPLES.md` for full request/response examples.
 - **CORS configured globally** in `WebConfig.java` to allow React frontend
 - **Polling** (every 3–5 seconds) used instead of WebSockets for simplicity
 - **Quiz status FSM**: `CREATED → STARTED → FINISHED` (one-way only, enforced in service layer)
+## Load & Performance Benchmark (Local)
+
+- **Stack:** Spring Boot 3.2.0, Java 21, Spring Data JPA / Hibernate, HikariCP, MySQL
+- **Workload:** 20 concurrent client threads running 100 full player cycles (400 total requests: `POST /api/player/join` → `GET /api/question/quiz/{id}/random` → `POST /api/player/submit` → `GET /api/player/quiz/{id}/leaderboard`)
+- **Throughput:** **272.35 req/s** (400 requests in **1.47s**, **0% error rate**)
+- **Overall Latency:** **p50:** `56.5 ms` | **p95:** `160.9 ms` | **p99:** `262.4 ms`
+- **Endpoint Highlights:** `GET .../random` was fastest (`p50: 41.8 ms`, `p95: 83.2 ms`), while `POST /api/player/submit` had the highest write/tail latency (`p50: 84.0 ms`, `p95: 256.2 ms`)
